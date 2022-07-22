@@ -8,5 +8,7 @@
 using namespace std;
 
 string read(string name);
+void write(string data);
+string first_method(string data,int seed);
 
 #endif // TOOLS_H
