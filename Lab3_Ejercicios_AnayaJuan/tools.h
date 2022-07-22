@@ -7,4 +7,6 @@
 
 using namespace std;
 
+string read(string name);
+
 #endif // TOOLS_H
