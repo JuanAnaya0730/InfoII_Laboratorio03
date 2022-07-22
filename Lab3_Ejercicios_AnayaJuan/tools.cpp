@@ -19,3 +19,18 @@ string read(string name)
 
     return data;
 }
+
+void write(string name, string data)
+{
+    ofstream file;
+
+    file.open(name);
+    if (file.is_open()){
+        file << data;
+        file.close();
+    }
+    else{
+        cout << "Error al abrir el archivo." << endl;
+        exit(1);
+    }
+}
