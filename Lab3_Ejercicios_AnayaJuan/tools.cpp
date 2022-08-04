@@ -42,7 +42,7 @@ string first_method(string data, int seed)
     int countOne = 0, countZero = 0, module;
     string block;
 
-    while (binaryData.length()){
+    while (true){
 
         block = binaryData.substr(0, seed);
 
@@ -50,7 +50,7 @@ string first_method(string data, int seed)
         else if (countZero > countOne) module = 2;
         else module = 3;
 
-        for (int i=1; i<=seed; ++i){
+        for (int i=1; i<=int(block.length()); ++i){
             if (i % module == 0){
                 block[i-1] == '0' ? encryptedData += '1' : encryptedData += '0';
                 continue;
@@ -59,11 +59,12 @@ string first_method(string data, int seed)
         }
 
         countOne = countZero = 0;
-        for (int i=0; i<seed; ++i){
+        for (int i=0; i<int(block.length()); ++i){
             block[i] == '0' ? countZero++ : countOne++;
         }
 
-        binaryData = binaryData.substr(seed, binaryData.length()-1);
+        if(int(binaryData.length()) > seed) binaryData = binaryData.substr(seed, binaryData.length());
+        else break;
     }
 
     return encryptedData;
