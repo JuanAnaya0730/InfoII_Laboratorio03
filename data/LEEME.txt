@@ -1,0 +1,2 @@
+En esta carpeta es donde deben agregarse los archivos que se desean codificar.
+Aquí mismo encontrara cada archivo que codifique usando el programa.
