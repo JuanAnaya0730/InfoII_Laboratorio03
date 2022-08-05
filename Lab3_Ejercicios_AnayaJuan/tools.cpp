@@ -70,6 +70,28 @@ string first_method(string data, int seed)
     return encryptedData;
 }
 
+string second_method(string data, int seed)
+{
+    string encryptedData;
+    string binaryData = text_to_binary(data);
+    string block;
+
+    while (true){
+
+        block = binaryData.substr(0, seed);
+
+        encryptedData += block[block.length()-1];
+        for(int i=0; i<int(block.length())-1; ++i){
+            encryptedData += block[i];
+        }
+
+        if(int(binaryData.length()) > seed) binaryData = binaryData.substr(seed, binaryData.length());
+        else break;
+    }
+
+    return encryptedData;
+}
+
 string text_to_binary(string text)
 {
     string binary, char_to_bin;
@@ -81,7 +103,7 @@ string text_to_binary(string text)
         }
         reverse(char_to_bin.begin(), char_to_bin.end());
         binary += char_to_bin;
-        text = text.substr(1, text.length()-1);
+        text = text.substr(1, text.length());
     }
 
     return binary;
