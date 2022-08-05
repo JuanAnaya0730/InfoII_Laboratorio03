@@ -11,7 +11,7 @@ int menu()
                 GREEN " Opcion: ";
         cin >> option;
 
-        system("cls");
+        system("cls"); // Se limpia la consola
         if(option[0] < 49 || option[0] > 50 || option.length() > 1){
             cout << RED "Opcion no valida, Intente de nuevo.\n" << endl;
         }else break;
@@ -34,7 +34,7 @@ string read(string name)
         file.close();
     }
     else{
-        cout << "Error al abrir el archivo." << endl;
+        cout << RED "Error al abrir el archivo " << name << RESET << endl;
         exit(1);
     }
 
@@ -51,7 +51,7 @@ void write(string name, string data)
         file.close();
     }
     else{
-        cout << "Error al abrir el archivo." << endl;
+        cout << RED "Error al crear o abrir el archivo " << name << RESET << endl;
         exit(1);
     }
 }
