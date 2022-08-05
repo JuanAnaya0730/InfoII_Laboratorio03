@@ -17,18 +17,19 @@ int menu()
         }else break;
     }
 
-    return option[0]-48;
+    return stoi(option);
 }
 
 string read(string name)
 {
     ifstream file;
-    string data;
+    string data, aux;
 
-    file.open(name);
+    file.open("../data/" + name);
     if (file.is_open()){
         while (!file.eof()) {
-            data += file.get();
+            getline(file, aux);
+            data += aux;
         }
         file.close();
     }
@@ -44,7 +45,7 @@ void write(string name, string data)
 {
     ofstream file;
 
-    file.open(name);
+    file.open("../data/" + name);
     if (file.is_open()){
         file << data;
         file.close();
