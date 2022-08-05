@@ -1,5 +1,25 @@
 #include "tools.h"
 
+int menu()
+{
+    string option;
+
+    while(true){
+        cout << GREEN "Menu:\n"
+                CYAN  "  1. Primer metodo.\n"
+                      "  2. Segundo metodo.\n"
+                GREEN " Opcion: ";
+        cin >> option;
+
+        system("cls");
+        if(option[0] < 49 || option[0] > 50 || option.length() > 1){
+            cout << RED "Opcion no valida, Intente de nuevo.\n" << endl;
+        }else break;
+    }
+
+    return option[0]-48;
+}
+
 string read(string name)
 {
     ifstream file;
