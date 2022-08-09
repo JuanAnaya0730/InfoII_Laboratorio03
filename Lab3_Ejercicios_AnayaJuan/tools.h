@@ -22,5 +22,6 @@ void write(string name, string data);
 string first_method(string data,int seed);
 string second_method(string data,int seed);
 string text_to_binary(string text);
+string binary_to_text(string binary);
 
 #endif // TOOLS_H
