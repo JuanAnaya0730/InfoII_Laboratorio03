@@ -129,3 +129,24 @@ string text_to_binary(string text)
 
     return binary;
 }
+
+string binary_to_text(string binary)
+{
+    int ascii;
+    string text, bin_to_char;
+
+    while(binary.length()){
+        bin_to_char = binary.substr(0, 8);
+        reverse(bin_to_char.begin(), bin_to_char.end());
+
+        ascii = 0;
+        for(int i=0; i<8; ++i){
+            ascii += (int(bin_to_char[i]) - 48)*pow(2, i);
+        }
+        text += char(ascii);
+
+        binary = binary.substr(8, binary.length());
+    }
+
+    return text;
+}
