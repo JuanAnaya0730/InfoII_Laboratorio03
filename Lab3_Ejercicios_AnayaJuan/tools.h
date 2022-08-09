@@ -4,6 +4,7 @@
 #include <iostream>
 #include <algorithm>
 #include <fstream>
+#include <math.h>
 #include <string>
 
 #define RESET "\e[0m"
