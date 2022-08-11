@@ -118,26 +118,40 @@ string decrypt_first_method(string binary, size_t seed)
     return decrypted_data;
 }
 
-string second_method(string data, int seed)
+string encrypt_second_method(string binary, size_t seed)
 {
-    string encryptedData;
-    string binaryData = text_to_binary(data);
+    string encrypted_data;
     string block;
 
     while (true){
+        block = binary.substr(0, seed);
 
-        block = binaryData.substr(0, seed);
+        encrypted_data += block.back();
+        for(size_t i=0; i < block.length()-1; ++i){ encrypted_data += block[i]; }
 
-        encryptedData += block[block.length()-1];
-        for(int i=0; i<int(block.length())-1; ++i){
-            encryptedData += block[i];
-        }
+        if(binary.length() > seed){ binary = binary.substr(seed, binary.length()); }
+        else{ break; }
+    }
 
-        if(int(binaryData.length()) > seed) binaryData = binaryData.substr(seed, binaryData.length());
+    return encrypted_data;
+}
+
+string decrypt_second_method(string binary, size_t seed)
+{
+    string decrypted_data;
+    string block;
+
+    while(true){
+        block = binary.substr(0, seed);
+
+        for(size_t i=1; i < block.length(); ++i){ decrypted_data += block[i]; }
+        decrypted_data += block.front();
+
+        if(binary.length() > seed) binary = binary.substr(seed, binary.length());
         else break;
     }
 
-    return encryptedData;
+    return decrypted_data;
 }
 
 string text_to_binary(string text)
