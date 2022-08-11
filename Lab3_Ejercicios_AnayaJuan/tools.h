@@ -21,6 +21,7 @@ int menu(void);
 string read(string name);
 void write(string name, string data);
 string first_method(string data,int seed);
+string decrypt_first_method(string binary, size_t seed);
 string second_method(string data,int seed);
 string text_to_binary(string text);
 string binary_to_text(string binary);
