@@ -17,7 +17,7 @@
 
 using namespace std;
 
-int menu(void);
+int menu(int type);
 
 /*! Esta fucion es la encargada de leer un archivo */
 string read(string name);
