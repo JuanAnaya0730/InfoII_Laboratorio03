@@ -2,29 +2,35 @@
 
 int menu(int type)
 {
-    string option;
+    // type es el menu que debe ser mostrado
+
+    string option; // Esta es la opcion tomada por el usuario
 
     while(true){
         if(!type){
+            /* Se imprime el menu principal para type 0 */
             cout << GREEN "Menu:\n"
-                    CYAN  "  1. Encriptar archivo.\n"
-                          "  2. Desencriptar archivo.\n"
+                    CYAN  "  1. Codificar archivo.\n"
+                          "  2. Decodificar archivo.\n"
                     GREEN " Opcion: ";
-        }else{
+        }else{ /* Se imprime el menu principal para type 1 */
             cout << GREEN "Metodos:\n"
                     CYAN  "  1. Primer metodo.\n"
                           "  2. Segundo metodo.\n"
                     GREEN " Opcion: ";
         }
-        cin >> option;
+
+        cin >> option; // Se toma la opcion ingresada
 
         system("cls"); // Se limpia la consola
+
+        /* Se valida la opcion ingresada */
         if(option[0] < 49 || option[0] > 50 || option.length() > 1){
             cout << RED "Opcion no valida, Intente de nuevo.\n" << endl;
-        }else break;
+        }else{ break; }
     }
 
-    return stoi(option);
+    return stoi(option); // Se retorna la opcion tomada por el usuario
 }
 
 string read(string name)
