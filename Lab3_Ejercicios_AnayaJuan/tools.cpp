@@ -56,41 +56,39 @@ void write(string name, string data)
     }
 }
 
-string first_method(string data, int seed)
+string encrypt_first_method(string binary, size_t seed)
 {
-    string encryptedData;
-    string binaryData = text_to_binary(data);
-    int countOne = 0, countZero = 0, module;
+    string encrypted_data;
+    size_t countOne = 0, countZero = 0, module;
     string block;
 
     while (true){
-        block = binaryData.substr(0, seed);
+        block = binary.substr(0, seed);
 
         if (countZero == countOne) module = 1;
         else if (countZero > countOne) module = 2;
         else module = 3;
 
-        for (int i=1; i<=int(block.length()); ++i){
-            if (i % module == 0){
-                block[i-1] == '0' ? encryptedData += '1' : encryptedData += '0';
-                continue;
-            }
-            encryptedData += block[i-1];
-        }
-
         countOne = countZero = 0;
-        for (int i=0; i<int(block.length()); ++i){
+        for (size_t i=0; i<block.length(); ++i){
             block[i] == '0' ? countZero++ : countOne++;
         }
 
-        if(int(binaryData.length()) > seed) binaryData = binaryData.substr(seed, binaryData.length());
+        for (size_t i=1; i<=block.length(); ++i){
+            if (!(i % module)) block[i-1] == '0' ? block[i-1] = '1' : block[i-1] = '0';
+        }
+
+        encrypted_data += block;
+
+        if(binary.length() > seed) binary = binary.substr(seed, binary.length());
         else break;
     }
 
-    return encryptedData;
+    return encrypted_data;
 }
 
-string decrypt_first_method(string binary, size_t seed){
+string decrypt_first_method(string binary, size_t seed)
+{
     string decrypted_data;
     size_t countOne = 0, countZero = 0, module;
     string block;
@@ -103,20 +101,19 @@ string decrypt_first_method(string binary, size_t seed){
         else module = 3;
 
         for (size_t i=1; i<=block.length(); ++i){
-            if (i % module == 0) block[i-1] == '0' ? block[i-1] = '1' : block[i-1] = '0';
+            if (!(i % module)) block[i-1] == '0' ? block[i-1] = '1' : block[i-1] = '0';
+        }
+
+        countOne = countZero = 0;
+        for (size_t i=0; i<block.length(); ++i){
+            block[i] == '0' ? countZero++ : countOne++;
         }
 
         decrypted_data += block;
 
-        countOne = countZero = 0;
-        for (int i=0; i<int(block.length()); ++i){
-            block[i] == '0' ? countZero++ : countOne++;
-        }
-
         if(binary.length() > seed) binary = binary.substr(seed, binary.length());
         else break;
     }
-
 
     return decrypted_data;
 }

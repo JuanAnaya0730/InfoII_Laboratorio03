@@ -20,7 +20,7 @@ using namespace std;
 int menu(void);
 string read(string name);
 void write(string name, string data);
-string first_method(string data,int seed);
+string encrypt_first_method(string binary, size_t seed);
 string decrypt_first_method(string binary, size_t seed);
 string second_method(string data,int seed);
 string text_to_binary(string text);
