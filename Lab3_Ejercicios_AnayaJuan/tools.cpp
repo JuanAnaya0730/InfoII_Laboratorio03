@@ -58,100 +58,129 @@ void write(string name, string data)
 
 string encrypt_first_method(string binary, size_t seed)
 {
-    string encrypted_data;
-    size_t countOne = 0, countZero = 0, module;
-    string block;
+    // binary son los datos binarios que seran sometidos a la encriptacion
+    // seed es la semilla de encriptacion
+
+    string encrypted_data; // Esto almacenara la forma encriptada de los datos ingresados
+    string block; // Esta variable ira almacenando los bloques de bits correspondientes a la semilla ingresada
+    size_t countOne = 0; // Contador de unos para cada bloque
+    size_t countZero = 0; // Contador de ceros para cada bloque
+    size_t module; // Es es variable dira que tratamineto se le debe a un bloque de n bits
 
     while (true){
-        block = binary.substr(0, seed);
+        block = binary.substr(0, seed); // Se separa un bloque de n bits, con n=seed
 
-        if (countZero == countOne) module = 1;
-        else if (countZero > countOne) module = 2;
-        else module = 3;
+        if (countZero == countOne) module = 1; // Se comprueba si la cantidad de unos y ceros de es igual
+        else if (countZero > countOne) module = 2; // Se comprueba si la cantidad de ceros es mayor que la de unos
+        else module = 3; // Este es el caso en que la cantidad de unos es mayor que la de ceros
 
         countOne = countZero = 0;
-        for (size_t i=0; i<block.length(); ++i){
-            block[i] == '0' ? countZero++ : countOne++;
-        }
+        /* Aqui se hace el conteo de unos y ceros de un bloque */
+        for (size_t i=0; i<block.length(); ++i){ block[i] == '0' ? countZero++ : countOne++; }
 
+        /* Aqui es donde se encripta cada bloque de n bits */
         for (size_t i=1; i<=block.length(); ++i){
             if (!(i % module)) block[i-1] == '0' ? block[i-1] = '1' : block[i-1] = '0';
         }
 
-        encrypted_data += block;
+        encrypted_data += block; // El bloque encriptado es añadido a los demas bloques que ya han sido encriptados
 
+        /* Se quita el bloque que fue separado para su encriptacion, si ya no quedan mas bloques disponibles
+         * se rompe el ciclo infinito */
         if(binary.length() > seed) binary = binary.substr(seed, binary.length());
         else break;
     }
 
-    return encrypted_data;
+    return encrypted_data; // Se retornan los datos ya encriptados
 }
 
 string decrypt_first_method(string binary, size_t seed)
 {
-    string decrypted_data;
-    size_t countOne = 0, countZero = 0, module;
-    string block;
+    // binary son los datos binarios que seran desencriptados
+    // seed es la semilla con la que los datos fueron encriptados
+
+    string decrypted_data; // Esto almacenara la forma desencriptada de los datos ingresados
+    string block; // Esta variable ira almacenando los bloques de bits correspondientes a la semilla ingresada
+    size_t countOne = 0; // Contador de unos para cada bloque
+    size_t countZero = 0; // Contador de ceros para cada bloque
+    size_t module; // Es es variable dira que tratamineto se le debe a un bloque de n bits
 
     while (true){
-        block = binary.substr(0, seed);
+        block = binary.substr(0, seed); // Se separa un bloque de n bits, con n=seed
 
-        if (countZero == countOne) module = 1;
-        else if (countZero > countOne) module = 2;
-        else module = 3;
+        if (countZero == countOne) module = 1; // Se comprueba si la cantidad de unos y ceros de es igual
+        else if (countZero > countOne) module = 2; // Se comprueba si la cantidad de ceros es mayor que la de unos
+        else module = 3; // Este es el caso en que la cantidad de unos es mayor que la de ceros
 
+        /* Aqui es donde se desencripta cada bloque de n bits */
         for (size_t i=1; i<=block.length(); ++i){
             if (!(i % module)) block[i-1] == '0' ? block[i-1] = '1' : block[i-1] = '0';
         }
 
         countOne = countZero = 0;
+        /* Aqui se hace el conteo de unos y ceros de un bloque */
         for (size_t i=0; i<block.length(); ++i){
             block[i] == '0' ? countZero++ : countOne++;
         }
 
-        decrypted_data += block;
+        decrypted_data += block; // El bloque desencriptado es añadido a los demas bloques que ya han sido desencriptados
 
+        /* Se quita el bloque que fue separado para su desencriptacion, si ya no quedan mas bloques disponibles
+         * se rompe el ciclo infinito */
         if(binary.length() > seed) binary = binary.substr(seed, binary.length());
         else break;
     }
 
-    return decrypted_data;
+    return decrypted_data; // Se retornan los datos ya desencriptados
 }
 
 string encrypt_second_method(string binary, size_t seed)
 {
-    string encrypted_data;
-    string block;
+    // binary son los datos binarios que seran sometidos a la encriptacion
+    // seed es la semilla de encriptacion
+
+    string encrypted_data; // Esto almacenara la forma encriptada de los datos ingresados
+    string block; // Esta variable ira almacenando los bloques de bits correspondientes a la semilla ingresada
 
     while (true){
-        block = binary.substr(0, seed);
+        block = binary.substr(0, seed); // Se separa un bloque de n bits, con n=seed
 
-        encrypted_data += block.back();
+        encrypted_data += block.back(); // Se añade de primero en un bloque el ultimo caracter de ese bloque
+
+        /* Se van añadiendo los bits faltantes corridos una posicion hacia delante respecto a su posicion original */
         for(size_t i=0; i < block.length()-1; ++i){ encrypted_data += block[i]; }
 
+        /* Se quita el bloque que fue separado para su encriptacion, si ya no quedan mas bloques disponibles
+         * se rompe el ciclo infinito */
         if(binary.length() > seed){ binary = binary.substr(seed, binary.length()); }
         else{ break; }
     }
 
-    return encrypted_data;
+    return encrypted_data; // Se retornan los datos ya encriptados
 }
 
 string decrypt_second_method(string binary, size_t seed)
 {
-    string decrypted_data;
-    string block;
+    // binary son los datos binarios que seran desencriptados
+    // seed es la semilla con la que los datos fueron encriptados
+
+    string decrypted_data; // Esto almacenara la forma desencriptada de los datos ingresados
+    string block; // Esta variable ira almacenando los bloques de bits correspondientes a la semilla ingresada
 
     while(true){
-        block = binary.substr(0, seed);
+        block = binary.substr(0, seed); // Se separa un bloque de n bits, con n=seed
 
+        /* Se van añadiendo los bits faltantes corridos una posicion hacia atras respecto a su posicion original */
         for(size_t i=1; i < block.length(); ++i){ decrypted_data += block[i]; }
-        decrypted_data += block.front();
+        decrypted_data += block.front(); // Se añade de ultimo en un bloque el primer caracter de ese bloque
 
-        if(binary.length() > seed) binary = binary.substr(seed, binary.length());
-        else break;
+        /* Se quita el bloque que fue separado para su desencriptacion, si ya no quedan mas bloques disponibles
+         * se rompe el ciclo infinito */
+        if(binary.length() > seed){ binary = binary.substr(seed, binary.length()); }
+        else{ break; }
     }
 
-    return decrypted_data;
+    return decrypted_data; // Se retornan los datos ya desencriptados
 }
 
 string text_to_binary(string text)
