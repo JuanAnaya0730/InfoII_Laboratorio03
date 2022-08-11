@@ -22,7 +22,8 @@ string read(string name);
 void write(string name, string data);
 string encrypt_first_method(string binary, size_t seed);
 string decrypt_first_method(string binary, size_t seed);
-string second_method(string data,int seed);
+string encrypt_second_method(string binary, size_t seed);
+string decrypt_second_method(string binary, size_t seed);
 string text_to_binary(string text);
 string binary_to_text(string binary);
 
