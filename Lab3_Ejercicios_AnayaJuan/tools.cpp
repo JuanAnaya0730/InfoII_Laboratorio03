@@ -64,7 +64,6 @@ string first_method(string data, int seed)
     string block;
 
     while (true){
-
         block = binaryData.substr(0, seed);
 
         if (countZero == countOne) module = 1;
@@ -89,6 +88,37 @@ string first_method(string data, int seed)
     }
 
     return encryptedData;
+}
+
+string decrypt_first_method(string binary, size_t seed){
+    string decrypted_data;
+    size_t countOne = 0, countZero = 0, module;
+    string block;
+
+    while (true){
+        block = binary.substr(0, seed);
+
+        if (countZero == countOne) module = 1;
+        else if (countZero > countOne) module = 2;
+        else module = 3;
+
+        for (size_t i=1; i<=block.length(); ++i){
+            if (i % module == 0) block[i-1] == '0' ? block[i-1] = '1' : block[i-1] = '0';
+        }
+
+        decrypted_data += block;
+
+        countOne = countZero = 0;
+        for (int i=0; i<int(block.length()); ++i){
+            block[i] == '0' ? countZero++ : countOne++;
+        }
+
+        if(binary.length() > seed) binary = binary.substr(seed, binary.length());
+        else break;
+    }
+
+
+    return decrypted_data;
 }
 
 string second_method(string data, int seed)
