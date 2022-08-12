@@ -17,6 +17,19 @@
 
 using namespace std;
 
+struct admin
+{
+    string ID;
+    string password;
+};
+
+struct user
+{
+    string ID;
+    string password;
+    size_t money;
+};
+
 /*! Esta fucion es la encargada de leer un archivo */
 string read(string name);
 
