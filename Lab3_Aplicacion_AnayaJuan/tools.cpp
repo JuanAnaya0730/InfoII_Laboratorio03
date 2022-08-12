@@ -165,18 +165,18 @@ int menu(int type)
                           "  2. Usuario corriente.\n"
                     GREEN " Opcion: ";
         }else if(type == 1){ /* Se imprime el menu principal para type 1 */
-            cout << GREEN "Que desea hacer?:\n"
+            cout << GREEN "Que desea hacer?\n"
                     CYAN  "  1. Agregar usuario.\n"
-                          "  2. Cancelar / Salir."
+                          "  2. Cancelar / Salir.\n"
                     GREEN " Opcion: ";
         }else{
-            cout << GREEN "Que desea hacer?:\n"
+            cout << GREEN "Que desea hacer?\n"
                     CYAN  "  1. Consultar saldo.\n"
-                          "  2. Retirar saldo."
+                          "  2. Retirar saldo.\n"
                     GREEN " Opcion: ";
         }
 
-        cin >> option; // Se toma la opcion ingresada
+        cin >> option; cin.ignore(); // Se toma la opcion ingresada
 
         system("cls"); // Se limpia la consola
 
