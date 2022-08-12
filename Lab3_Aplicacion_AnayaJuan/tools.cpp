@@ -28,6 +28,29 @@ void System::loadAdmins()
     }
 }
 
+void System::loadUsers()
+{
+    string data = binary_to_text(decrypt_first_method(read("users.txt"), USEED)) + '\n';
+    string data_user;
+    user aux_user;
+    size_t index;
+
+    while(data.length()){
+        index = data.find('\n');
+        data_user = data.substr(0, index);
+
+        aux_user.ID = data_user.substr(0, data_user.find(','));
+        data_user = data_user.substr(data_user.find(',')+1, data_user.length());
+        aux_user.password = data_user.substr(0, data_user.find(','));
+        aux_user.money = stoi(data_user.substr(data_user.find(',')+1, data_user.length()));
+
+        addUser(aux_user);
+
+        data = data.substr(index+1, data.length());
+    }
+
+}
+
 void System::addAdmin(admin new_admin)
 {
     admin *copy_admins = new admin[num_admins];
@@ -43,6 +66,23 @@ void System::addAdmin(admin new_admin)
 
     _admins_[num_admins] = new_admin;
     num_admins++;
+}
+
+void System::addUser(user new_user)
+{
+    user *copy_users = new user[num_users];
+
+    for(size_t i=0; i < num_users; ++i){ copy_users[i] = _users_[i]; }
+
+    delete[] _users_;
+
+    _users_ = new user[num_users+1];
+    for(size_t i=0; i < num_users; ++i){ _users_[i] = copy_users[i]; }
+
+    delete[] copy_users;
+
+    _users_[num_users] = new_user;
+    num_users++;
 }
 
 string read(string name)
