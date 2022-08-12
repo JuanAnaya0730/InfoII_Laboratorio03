@@ -36,7 +36,7 @@ struct user
 string read(string name);
 
 /*! Esta fucion retornara una lista con los administradores que esten en sudo.txt */
-string* loadAdmins(void);
+admin *loadAdmins(void);
 
 /*! Esta fucion encriptara datos binarios usando el primer metodo de encriptacion */
 string encrypt_first_method(string binary, size_t seed);
