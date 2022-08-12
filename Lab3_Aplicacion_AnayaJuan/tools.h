@@ -45,6 +45,10 @@ struct System
     void loadUsers(void);
     void addAdmin(admin new_admin);
     void addUser(user new_user);
+
+    bool is_admin(string id);
+    bool is_user(string id);
+
 };
 
 /*! Esta fucion es la encargada de leer un archivo */
