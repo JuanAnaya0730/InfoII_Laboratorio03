@@ -47,11 +47,11 @@ int main()
         }else{ cout << RED "El administrador con identificacion " << aux_admin.ID << " no esta registrado.\n" RESET << endl; }
     }else{
         cout << CYAN "Ingrese su indentificacion\n -> " GREEN;
-        getline(cin, aux_user.ID);
+        getline(cin, aux_user.ID);  system("cls"); // Se limpia la consola
 
         if(autoTeller.is_user(aux_user.ID) != -1){
             cout << CYAN "Ingrese su contrasena\n -> " GREEN;
-            getline(cin, aux_user.password);
+            getline(cin, aux_user.password); system("cls"); // Se limpia la consola
 
             if(autoTeller.checkUserPassword(aux_user.ID, aux_user.password)){
                 option = menu(2);
@@ -66,13 +66,16 @@ int main()
                     }
                 }else{
                     cout << CYAN "Cuanto desea retirar\n -> " GREEN;
-                    cin >> aux_user.money; cin.ignore();
+                    cin >> aux_user.money; cin.ignore(); system("cls"); // Se limpia la consola
 
-                    if(autoTeller._users_[autoTeller.is_user(aux_user.ID)].money - (aux_user.money + 1000) < 0){
+                    if(autoTeller._users_[autoTeller.is_user(aux_user.ID)].money < aux_user.money + 1000 ||
+                            autoTeller._users_[autoTeller.is_user(aux_user.ID)].money < 1000){
                         cout << RED "Su saldo es insuficiente para hacer el retiro.\n" RESET <<endl;
                     }else{
-                        cout << YELLOW "Retiro realizado exitosamente.\n" RESET << endl;
                         autoTeller._users_[autoTeller.is_user(aux_user.ID)].money -= (1000 + aux_user.money);
+
+                        cout << YELLOW "Retiro realizado exitosamente.\n" RESET << endl;
+
                     }
                 }
 
