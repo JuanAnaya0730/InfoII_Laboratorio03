@@ -59,6 +59,9 @@ struct System
     void save();
 };
 
+/*! Esta fucion es la encargada de imprimer los menus de la aplicacion */
+int menu(int type);
+
 /*! Esta fucion es la encargada de leer un archivo */
 string read(string name);
 

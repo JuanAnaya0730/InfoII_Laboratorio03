@@ -8,6 +8,12 @@ System::System()
     _users_ = nullptr;
 }
 
+void System::load()
+{
+    loadAdmins();
+    loadUsers();
+}
+
 void System::loadAdmins()
 {
     string data = binary_to_text(decrypt_first_method(read("sudo.txt"), USEED)) + '\n';
@@ -137,6 +143,50 @@ void System::saveUsers()
     } data.pop_back();
 
     write("users.txt", encrypt_first_method(text_to_binary(data), USEED));
+}
+
+void System::save()
+{
+    saveAdmins();
+    saveUsers();
+}
+
+int menu(int type)
+{
+    // type es el menu que debe ser mostrado
+
+    string option; // Esta es la opcion tomada por el usuario
+
+    while(true){
+        if(type == 0){
+            /* Se imprime el menu principal para type 0 */
+            cout << GREEN "Menu:\n"
+                    CYAN  "  1. Usuario administrador.\n"
+                          "  2. Usuario corriente.\n"
+                    GREEN " Opcion: ";
+        }else if(type == 1){ /* Se imprime el menu principal para type 1 */
+            cout << GREEN "Que desea hacer?:\n"
+                    CYAN  "  1. Agregar usuario.\n"
+                          "  2. Cancelar / Salir."
+                    GREEN " Opcion: ";
+        }else{
+            cout << GREEN "Que desea hacer?:\n"
+                    CYAN  "  1. Consultar saldo.\n"
+                          "  2. Retirar saldo."
+                    GREEN " Opcion: ";
+        }
+
+        cin >> option; // Se toma la opcion ingresada
+
+        system("cls"); // Se limpia la consola
+
+        /* Se valida la opcion ingresada */
+        if(option[0] < 49 || option[0] > 50 || option.length() > 1){
+            cout << RED "Opcion no valida, Intente de nuevo.\n" << endl;
+        }else{ break; }
+    }
+
+    return stoi(option); // Se retorna la opcion tomada por el usuario
 }
 
 string read(string name)
