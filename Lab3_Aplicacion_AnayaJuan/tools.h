@@ -53,6 +53,8 @@ struct System
     bool checkAdminPassword(string id, string password);
     bool checkUserPassword(string id, string password);
 
+    void saveAdmins(void);
+    void saveUsers(void);
 };
 
 /*! Esta fucion es la encargada de leer un archivo */
