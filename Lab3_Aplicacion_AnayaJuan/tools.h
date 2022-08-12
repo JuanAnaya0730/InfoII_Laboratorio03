@@ -43,11 +43,15 @@ struct System
 
     void loadAdmins(void);
     void loadUsers(void);
+
     void addAdmin(admin new_admin);
     void addUser(user new_user);
 
     bool is_admin(string id);
     bool is_user(string id);
+
+    bool checkAdminPassword(string id, string password);
+    bool checkUserPassword(string id, string password);
 
 };
 
