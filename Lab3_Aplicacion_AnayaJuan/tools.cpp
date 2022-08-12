@@ -85,6 +85,24 @@ void System::addUser(user new_user)
     num_users++;
 }
 
+bool System::is_admin(string id)
+{
+    for(size_t i=0; i < num_admins; ++i){
+        if(_admins_[i].ID == id){ return true; }
+    }
+
+    return false;
+}
+
+bool System::is_user(string id)
+{
+    for(size_t i=0; i < num_users; ++i){
+        if(_users_[i].ID == id){ return true; }
+    }
+
+    return false;
+}
+
 string read(string name)
 {
     // name es el nombre del archivo a leer
