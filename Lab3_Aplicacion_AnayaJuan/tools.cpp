@@ -103,6 +103,20 @@ int System::is_user(string id)
     return -1;
 }
 
+bool System::checkAdminPassword(string id, string password)
+{
+    if(_admins_[is_admin(id)].password == password){ return true; }
+
+    return false;
+}
+
+bool System::checkUserPassword(string id, string password)
+{
+    if(_users_[is_user(id)].password == password){ return true; }
+
+    return false;
+}
+
 string read(string name)
 {
     // name es el nombre del archivo a leer
@@ -131,6 +145,26 @@ string read(string name)
     }
 
     return data; // Se retorna el contenido del archivo
+}
+
+void write(string name, string data)
+{
+    // name es el nombre del archivo en el que se escribira
+    // data sera el contenido del archivo
+
+    ofstream file; // Archivo a escribir
+
+    file.open("../data/" + name); // Se abre el archivo
+    if (file.is_open()){ // Se verifica si el archivo abrio correctamente
+
+        file << data; // Se escribe en el archivo
+
+        file.close(); // Se cierra el archivo
+    }
+    else{ // Si el archivo no se pudo abrir se muestra el mensaje correspondiente y finaliza el programa
+        cout << RED "Error al crear o abrir el archivo " << name << RESET << endl;
+        exit(1);
+    }
 }
 
 string encrypt_first_method(string binary, size_t seed)

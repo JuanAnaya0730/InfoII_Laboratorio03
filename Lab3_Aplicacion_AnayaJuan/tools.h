@@ -58,6 +58,9 @@ struct System
 /*! Esta fucion es la encargada de leer un archivo */
 string read(string name);
 
+/*! Esta fucion es la encargada de escribir en un archivo */
+void write(string name, string data);
+
 /*! Esta fucion encriptara datos binarios usando el primer metodo de encriptacion */
 string encrypt_first_method(string binary, size_t seed);
 
