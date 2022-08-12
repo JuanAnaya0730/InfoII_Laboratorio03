@@ -33,4 +33,7 @@ struct user
 /*! Esta fucion es la encargada de leer un archivo */
 string read(string name);
 
+/*! Esta fucion retornara una lista con los administradores que esten en sudo.txt */
+string* loadAdmins(void);
+
 #endif // TOOLS_H
