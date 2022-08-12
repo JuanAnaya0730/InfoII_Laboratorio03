@@ -39,6 +39,8 @@ struct System
     admin *_admins_;
     user *_users_;
 
+    System();
+
     void loadAdmins(void);
     void loadUsers(void);
     void addAdmin(admin new_admin);
