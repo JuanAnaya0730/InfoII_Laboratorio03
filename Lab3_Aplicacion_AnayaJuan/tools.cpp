@@ -88,19 +88,19 @@ void System::addUser(user new_user)
 int System::is_admin(string id)
 {
     for(size_t i=0; i < num_admins; ++i){
-        if(_admins_[i].ID == id){ return true; }
+        if(_admins_[i].ID == id){ return i; }
     }
 
-    return false;
+    return -1;
 }
 
 int System::is_user(string id)
 {
     for(size_t i=0; i < num_users; ++i){
-        if(_users_[i].ID == id){ return true; }
+        if(_users_[i].ID == id){ return i; }
     }
 
-    return false;
+    return -1;
 }
 
 string read(string name)
