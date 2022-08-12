@@ -117,6 +117,28 @@ bool System::checkUserPassword(string id, string password)
     return false;
 }
 
+void System::saveAdmins()
+{
+    string data;
+
+    for(size_t i=0; i < num_admins; ++i){
+        data += _admins_[i].ID + "," + _admins_[i].password + '\n';
+    } data.pop_back();
+
+    write("sudo.txt", encrypt_first_method(text_to_binary(data), USEED));
+}
+
+void System::saveUsers()
+{
+    string data;
+
+    for(size_t i=0; i < num_users; ++i){
+        data += _users_[i].ID + "," + _users_[i].password + "," + to_string(_users_[i].money) + '\n';
+    } data.pop_back();
+
+    write("users.txt", encrypt_first_method(text_to_binary(data), USEED));
+}
+
 string read(string name)
 {
     // name es el nombre del archivo a leer
