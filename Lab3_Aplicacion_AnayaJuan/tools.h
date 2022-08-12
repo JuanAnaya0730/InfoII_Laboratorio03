@@ -41,6 +41,7 @@ struct System
 
     System();
 
+    void load(void);
     void loadAdmins(void);
     void loadUsers(void);
 
@@ -55,6 +56,7 @@ struct System
 
     void saveAdmins(void);
     void saveUsers(void);
+    void save();
 };
 
 /*! Esta fucion es la encargada de leer un archivo */
