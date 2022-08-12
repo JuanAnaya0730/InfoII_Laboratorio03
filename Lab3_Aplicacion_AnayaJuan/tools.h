@@ -15,6 +15,8 @@
 #define MAGENTA "\e[0;35m"
 #define CYAN "\e[0;36m"
 
+#define USEED 4 // Esta es la semilla universal
+
 using namespace std;
 
 struct admin
@@ -35,5 +37,18 @@ string read(string name);
 
 /*! Esta fucion retornara una lista con los administradores que esten en sudo.txt */
 string* loadAdmins(void);
+
+/*! Esta fucion encriptara datos binarios usando el primer metodo de encriptacion */
+string encrypt_first_method(string binary, size_t seed);
+
+/*! Esta fucion dencriptara datos binarios que fueron codificados usando
+ *  el primer metodo de encriptacion */
+string decrypt_first_method(string binary, size_t seed);
+
+/*! Esta funcion se encarga de pasar un texto a su equivalente en binario */
+string text_to_binary(string text);
+
+/*! Esta funcion se encarga de pasar datos binarios a su equivalente en texto o ASCII */
+string binary_to_text(string binary);
 
 #endif // TOOLS_H
