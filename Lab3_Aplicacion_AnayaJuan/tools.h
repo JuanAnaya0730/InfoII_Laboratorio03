@@ -32,11 +32,21 @@ struct user
     size_t money;
 };
 
+struct System
+{
+    size_t num_admins;
+    size_t num_users;
+    admin *_admins_;
+    user *_users_;
+
+    void loadAdmins(void);
+    void loadUsers(void);
+    void addAdmin(admin new_admin);
+    void addUser(user new_user);
+};
+
 /*! Esta fucion es la encargada de leer un archivo */
 string read(string name);
-
-/*! Esta fucion retornara una lista con los administradores que esten en sudo.txt */
-admin *loadAdmins(void);
 
 /*! Esta fucion encriptara datos binarios usando el primer metodo de encriptacion */
 string encrypt_first_method(string binary, size_t seed);
